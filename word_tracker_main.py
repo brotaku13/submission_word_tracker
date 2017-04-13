@@ -27,7 +27,7 @@ def search_bill_gates(r):
 
 def user_words(r, username):
     # collects words from all comments (last 1000?) and puts them in a text file
-    with open("{} comments.txt".format(username), 'w', encoding='utf-16') as f:
+    with open("{} comments.txt".format(username), 'w', encoding='utf-8') as f:
         comment_count=0
         for comment in r.redditor(username).comments.new(limit=None):
             try:
@@ -57,9 +57,10 @@ def word_count(username):
         elif word_list[i][-1] in '!?.,"]@#$%^&*()\':;':
             word_list[i] = word_list[i].replace(word_list[i], word_list[i][0:len(word_list[i])-2])
 
-    long_word_list = [word for word in word_list if len(word) > 5]
+    long_word_list = [word for word in word_list if len(word) > 7]
 
     word_count = Counter(long_word_list)
+    print("Most comon")
     for key, value in word_count.most_common(50):
         print('{} : {}'.format(key, value))
 
